@@ -12,6 +12,7 @@
       background-size: cover;
       background-position: center;
       height: 100vh;
+      background-color: black; /* Set initial background color */
     }
 
     #end-text {
@@ -23,33 +24,10 @@
       color: white;
       display: none;
     }
-
-    #image-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-
-    #image-overlay p {
-      color: white;
-      font-size: 20px;
-      margin: 0;
-    }
   </style>
 </head>
 <body>
   <div id="end-text">Lance o dado outra vez</div>
-  <div id="image-overlay">
-    <p>Nova Imagem</p>
-  </div>
 
   <script>
     const images = [
@@ -64,22 +42,10 @@
     ];
 
     let currentImageIndex = 0;
-    let isTransitioning = false;
 
     const nextImage = () => {
-      if (!isTransitioning) {
-        isTransitioning = true;
-
-        const imageOverlay = document.getElementById('image-overlay');
-        imageOverlay.style.opacity = '1';
-
-        setTimeout(() => {
-          document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-          currentImageIndex = (currentImageIndex + 1) % images.length;
-          imageOverlay.style.opacity = '0';
-          isTransitioning = false;
-        }, 500); // Adjust the duration to match the overlay transition
-      }
+      document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+      currentImageIndex = (currentImageIndex + 1) % images.length;
     };
 
     const endPage = () => {
@@ -91,7 +57,7 @@
       }, 15000);
     };
 
-    // Display random images every 3 seconds
+    // Display random images every 3 seconds for 15 seconds
     const displayImages = () => {
       setInterval(() => {
         nextImage();
