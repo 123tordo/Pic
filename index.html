@@ -1,278 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-PT">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Random Art Quiz</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background-color: #3498db; /* Blue background color */
-            color: #ecf0f1; /* Light grey text color */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 28px;
-            text-align: center;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Images</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 2s ease-in-out;
+    }
 
-        h1 {
-            font-size: 36px;
-            color: #e74c3c; /* Red color for headers */
-            margin-bottom: 20px;
-        }
-    </style>
+    #end-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: white;
+      display: none;
+    }
+  </style>
 </head>
 <body>
+  <div id="end-text">Lance o dado outra vez</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const questionContainer = document.body;
-        const countdownElement = document.createElement("div");
+  <script>
+    const images = [P1880995.JPG
+P1890002.JPG
+P1890012.JPG
+P1890015.JPG
+P1890059.JPG
+P1890071.JPG
+P1890073.JPG
+P1890081.JPG
+P1890083.JPG
+    ];
 
-        const allArtQuestions = [
-    {
-        question: "In which year was the first motion picture shown to the public?",
-        answer: "1895"
-    },
-    {
-        question: "Who directed the movie 'The Godfather'?",
-        answer: "Francis Ford Coppola"
-    },
-    {
-        question: "What is the highest-grossing film of all time (as of my knowledge cutoff in 2022)?",
-        answer: "'Avatar' (2009)"
-    },
-    {
-        question: "Which actor played the character of Tony Stark in the Marvel Cinematic Universe?",
-        answer: "Robert Downey Jr."
-    },
-    {
-        question: "What is the name of the fictional African country in 'Black Panther'?",
-        answer: "Wakanda"
-    },
-    {
-        question: "Who won the Academy Award for Best Director in 2020 for the film 'Parasite'?",
-        answer: "Bong Joon-ho"
-    },
-    {
-        question: "Which movie features a character named Hannibal Lecter?",
-        answer: "'The Silence of the Lambs'"
-    },
-    {
-        question: "In 'The Shawshank Redemption,' what does Andy Dufresne use to escape from Shawshank Prison?",
-        answer: "Tunnel and sewage pipe"
-    },
-    {
-        question: "Who played the lead role in the movie 'Forrest Gump'?",
-        answer: "Tom Hanks"
-    },
-    {
-        question: "What is the name of the fictional wizarding bank in the 'Harry Potter' series?",
-        answer: "Gringotts"
-    },
-{
-        question: "Who directed the film 'Schindler's List'?",
-        answer: "Steven Spielberg"
-    },
-    {
-        question: "Which movie won the Academy Award for Best Animated Feature in 2021?",
-        answer: "'Soul'"
-    },
-    {
-        question: "In 'The Wizard of Oz,' what color is the Emerald City?",
-        answer: "Green"
-    },
-    {
-        question: "Who played the character of Katniss Everdeen in 'The Hunger Games' series?",
-        answer: "Jennifer Lawrence"
-    },
-    {
-        question: "What is the name of the computer in the movie '2001: A Space Odyssey'?",
-        answer: "HAL 9000"
-    },
-    {
-        question: "Who directed the film 'The Shining'?",
-        answer: "Stanley Kubrick"
-    },
-    {
-        question: "Which actor starred as Neo in 'The Matrix' trilogy?",
-        answer: "Keanu Reeves"
-    },
-    {
-        question: "In 'Casablanca,' what is the name of the nightclub owned by Rick Blaine?",
-        answer: "Rick's Café Américain"
-    },
-    {
-        question: "Who played the role of Vito Corleone in 'The Godfather'?",
-        answer: "Marlon Brando"
-    },
-    {
-        question: "What is the title of the first James Bond film?",
-        answer: "'Dr. No'"
-    },
-    {
-        question: "Who directed the film 'Gone with the Wind'?",
-        answer: "Victor Fleming"
-    },
-    {
-        question: "In 'Eternal Sunshine of the Spotless Mind,' what is the name of the memory-erasing company?",
-        answer: "Lacuna"
-    },
-    {
-        question: "Which film is known for the line 'Life is like a box of chocolates'?",
-        answer: "'Forrest Gump'"
-    },
-    {
-        question: "Who won the Academy Award for Best Actress for her role in 'Black Swan'?",
-        answer: "Natalie Portman"
-    },
-    {
-        question: "What is the name of the alien in the film 'E.T. the Extra-Terrestrial'?",
-        answer: "E.T."
-    },
-    {
-        question: "Who played the character of Maximus in the film 'Gladiator'?",
-        answer: "Russell Crowe"
-    },
-    {
-        question: "In 'The Dark Knight,' what is the name of Harvey Dent's alter ego?",
-        answer: "Two-Face"
-    },
-    {
-        question: "Which movie features a character named Jack Dawson and Rose DeWitt Bukater?",
-        answer: "'Titanic'"
-    },
-    {
-        question: "Who directed the film 'The Grand Budapest Hotel'?",
-        answer: "Wes Anderson"
-    },
-    {
-        question: "In 'The Breakfast Club,' what is the nickname of John Bender's character?",
-        answer: "The Bender"
-    },
-{
-        question: "Who directed the film 'Inglourious Basterds'?",
-        answer: "Quentin Tarantino"
-    },
-    {
-        question: "Which movie features a character named Ferris Bueller skipping school?",
-        answer: "'Ferris Bueller's Day Off'"
-    },
-    {
-        question: "In 'The Lord of the Rings' trilogy, who played the role of Frodo Baggins?",
-        answer: "Elijah Wood"
-    },
-    {
-        question: "Who won the Academy Award for Best Actor for his role in 'The Theory of Everything'?",
-        answer: "Eddie Redmayne"
-    },
-    {
-        question: "What is the title of the Pixar film that features a rat named Remy who dreams of becoming a chef?",
-        answer: "'Ratatouille'"
-    },
-    {
-        question: "Which film tells the story of a man aging backward and won the Academy Award for Best Picture in 2009?",
-        answer: "'The Curious Case of Benjamin Button'"
-    },
-    {
-        question: "Who directed the film 'Jurassic Park'?",
-        answer: "Steven Spielberg"
-    },
-    {
-        question: "In 'Back to the Future,' what is the name of the time-traveling car?",
-        answer: "DeLorean"
-    },
-    {
-        question: "Which actor played the character of Jules Winnfield in 'Pulp Fiction'?",
-        answer: "Samuel L. Jackson"
-    },
-    {
-        question: "What is the name of the fictional character played by Johnny Depp in the 'Pirates of the Caribbean' series?",
-        answer: "Captain Jack Sparrow"
-    },
-    {
-        question: "Who directed the film 'The Social Network'?",
-        answer: "David Fincher"
-    },
-    {
-        question: "In 'The Matrix,' what is the real name of Neo?",
-        answer: "Thomas Anderson"
-    },
-    {
-        question: "Which film features a character named Travis Bickle, portrayed by Robert De Niro?",
-        answer: "'Taxi Driver'"
-    },
-    {
-        question: "Who played the lead role in the film 'A Beautiful Mind'?",
-        answer: "Russell Crowe"
-    },
-    {
-        question: "What is the name of the magical school in the 'Harry Potter' series?",
-        answer: "Hogwarts School of Witchcraft and Wizardry"
-    },
-    {
-        question: "Who won the Academy Award for Best Supporting Actress for her role in 'Les Misérables'?",
-        answer: "Anne Hathaway"
-    },
-    {
-        question: "In 'The Princess Bride,' what is the famous line that Inigo Montoya repeats throughout the film?",
-        answer: "'Hello. My name is Inigo Montoya. You killed my father. Prepare to die.'"
-    },
-    {
-        question: "Which film is known for the line 'May the Force be with you'?",
-        answer: "'Star Wars'"
-    },
-    {
-        question: "Who directed the film 'The Revenant'?",
-        answer: "Alejandro G. Iñárritu"
-    },
-    {
-        question: "In 'The Terminator,' who played the role of the Terminator?",
-        answer: "Arnold Schwarzenegger"
-    },];
+    const randomImage = () => {
+      const randomIndex = Math.floor(Math.random() * images.length);
+      document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+    };
 
-        function displayRandomQuestion() {
-            const randomIndex = Math.floor(Math.random() * allArtQuestions.length);
-            const currentQuestion = allArtQuestions[randomIndex];
+    const endPage = () => {
+      document.body.style.backgroundColor = "black";
+      const endText = document.getElementById("end-text");
+      endText.style.display = "block";
+    };
 
-            questionContainer.innerHTML = `<h1>${currentQuestion.question}</h1>`;
+    // Display random images for 15 seconds
+    const displayImages = () => {
+      randomImage();
+      setTimeout(() => {
+        endPage();
+      }, 15000);
+    };
 
-            // Show the countdown for 15 seconds
-            let secondsLeft = 15;
-            countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
-            document.body.appendChild(countdownElement);
-
-            const countdownInterval = setInterval(() => {
-                secondsLeft--;
-
-                if (secondsLeft >= 0) {
-                    countdownElement.textContent = `Tempo restante: ${secondsLeft}s`;
-                } else {
-                    clearInterval(countdownInterval);
-                    countdownElement.textContent = "";
-
-                    // Show the answer for 10 seconds
-                    questionContainer.innerHTML = `<h1>Resposta: ${currentQuestion.answer}</h1>`;
-                    setTimeout(() => {
-                        // Show "Lance o dado outra vez" for 10 seconds
-                        questionContainer.innerHTML = "<h1>Lance o dado outra vez</h1>";
-                        setTimeout(() => {
-                            // Turn the complete page to black after 10 seconds
-                            document.body.style.backgroundColor = "black";
-                        }, 10000);
-                    }, 10000);
-                }
-            }, 1000);
-        }
-
-        displayRandomQuestion(); // Initial call to start the quiz
-    });
-</script>
-
+    // Start the process when the page loads
+    displayImages();
+  </script>
 </body>
 </html>
-
