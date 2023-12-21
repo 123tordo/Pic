@@ -83,9 +83,12 @@
     };
 
     const endPage = () => {
-      document.body.style.backgroundColor = "black";
-      const endText = document.getElementById("end-text");
-      endText.style.display = "block";
+      setTimeout(() => {
+        document.body.style.backgroundImage = 'none';
+        document.body.style.backgroundColor = 'black';
+        const endText = document.getElementById('end-text');
+        endText.style.display = 'block';
+      }, 15000);
     };
 
     // Display random images every 3 seconds
