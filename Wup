@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Images</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      transition: background-color 2s ease-in-out;
+    }
+
+    #end-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: white;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="end-text">Lance o dado outra vez</div>
+
+  <script>
+    const images = [
+      "image1.jpg",
+      "image2.jpg",
+      "image3.jpg",
+      // Add more image URLs as needed
+    ];
+
+    const randomImage = () => {
+      const randomIndex = Math.floor(Math.random() * images.length);
+      document.body.style.backgroundImage = `url('${images[randomIndex]}')`;
+    };
+
+    const endPage = () => {
+      document.body.style.backgroundColor = "black";
+      const endText = document.getElementById("end-text");
+      endText.style.display = "block";
+    };
+
+    // Display random images for 15 seconds
+    const displayImages = () => {
+      randomImage();
+      setTimeout(() => {
+        endPage();
+      }, 15000);
+    };
+
+    // Start the process when the page loads
+    displayImages();
+  </script>
+</body>
+</html>
