@@ -26,11 +26,15 @@
   <div id="end-text">Lance o dado outra vez</div>
 
   <script>
-    const images = [
-      "image1.jpg",
-      "image2.jpg",
-      "image3.jpg",
-      // Add more image URLs as needed
+    const images = [P1880995.JPG
+P1890002.JPG
+P1890012.JPG
+P1890015.JPG
+P1890059.JPG
+P1890071.JPG
+P1890073.JPG
+P1890081.JPG
+P1890083.JPG
     ];
 
     const randomImage = () => {
