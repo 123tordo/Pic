@@ -50,12 +50,15 @@
     };
 
     const endPage = () => {
-      setTimeout(() => {
-        document.body.style.backgroundImage = 'none';
-        document.body.style.backgroundColor = 'black';
-        const endText = document.getElementById('end-text');
-        endText.style.display = 'block';
-      }, 15000);
+      document.body.style.backgroundImage = 'none';
+      document.body.style.backgroundColor = 'black';
+      const endText = document.getElementById('end-text');
+      endText.style.display = 'block';
+    };
+
+    const stopPage = () => {
+      clearInterval(imageInterval);
+      endPage();
     };
 
     const handleTouchStart = (event) => {
@@ -74,20 +77,15 @@
     };
 
     // Display random images every 3 seconds for 15 seconds
-    const displayImages = () => {
-      setInterval(() => {
-        nextImage();
-      }, 3000);
+    const imageInterval = setInterval(() => {
+      nextImage();
+    }, 3000);
 
-      setTimeout(() => {
-        endPage();
-      }, 15000);
-    };
+    setTimeout(() => {
+      stopPage();
+    }, 15000);
 
     // Start the process when the page loads
-    displayImages();
-
-    // Event listeners for touch events
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchend', handleTouchEnd, false);
   </script>
