@@ -31,44 +31,20 @@
 
   <script>
     const images = [
-  'IMG_9146.jpg',
-  'IMG_9963.JPG',
-  '3fd16c8e-ab20-4a14-badc-ca69e24d3b27.JPG',
-  '5cf24bf5-c559-480f-a37f-5c26547f596f.JPG',
-  '6e86fed0-de7a-429c-9af3-c20f598820a3.JPG',
-  '35f11b48-34ee-4cf1-9881-784a2ec72b20.JPG',
-  '53ef57d6-916e-4f01-ad60-a8e49d64592c.JPG',
-  '069b4c43-cbcf-4679-8076-7adc33cf248d.JPG',
-  '98ceffb6-f145-49f1-a1fe-10c53409e976.JPG',
-  '617e15c6-aa78-4149-ae1e-db641fc24a55.JPG',
-  '927ab7c3-7452-47b4-b95c-032c92e8345b.JPG',
-  'a39b7359-51f3-4c84-a16f-2714244b8888.JPG',
-  'a56b4890-ce79-473e-8b49-7a2165fc3f50.JPG',
-  'c24a9505-51b3-432a-b951-8ab291d2e840.JPG',
-  'd4514f6d-8c3f-40e6-b25a-ca58be715d64.JPG',
-  'f6fdbfc7-cd43-4dd6-a9a4-e973f67eec1b.JPG',
-  'f8f4d079-77fa-4d0c-87bf-0ab97a3decd9.JPG',
-  'f2722505-e04d-408a-a61e-81bd94055d2b.JPG',
-  'IMG_0099.JPG',
-  'IMG_0619.jpg',
-  'IMG_2429.JPG',
-  'IMG_2823.JPG',
-  'IMG_2882.jpg',
-  'IMG_3077.JPG',
-  'IMG_3082.JPG',
-  'IMG_3163.JPG',
-  'IMG_4121.JPG',
-  'IMG_4155.jpg',
-  'IMG_4177.jpg',
-  'IMG_5016.JPG',
-  'IMG_5242.JPG',
-  'IMG_6097.JPG',
-  'IMG_8385.jpg',
-  'IMG_8508.jpg',
-  'IMG_8558.jpg',
-  'IMG_8815.JPG',
-  'IMG_8825.JPG'
-];
+      'IMG_9146.jpg', 'IMG_9963.JPG', '3fd16c8e-ab20-4a14-badc-ca69e24d3b27.JPG',
+      '5cf24bf5-c559-480f-a37f-5c26547f596f.JPG', '6e86fed0-de7a-429c-9af3-c20f598820a3.JPG',
+      '35f11b48-34ee-4cf1-9881-784a2ec72b20.JPG', '53ef57d6-916e-4f01-ad60-a8e49d64592c.JPG',
+      '069b4c43-cbcf-4679-8076-7adc33cf248d.JPG', '98ceffb6-f145-49f1-a1fe-10c53409e976.JPG',
+      '617e15c6-aa78-4149-ae1e-db641fc24a55.JPG', '927ab7c3-7452-47b4-b95c-032c92e8345b.JPG',
+      'a39b7359-51f3-4c84-a16f-2714244b8888.JPG', 'a56b4890-ce79-473e-8b49-7a2165fc3f50.JPG',
+      'c24a9505-51b3-432a-b951-8ab291d2e840.JPG', 'd4514f6d-8c3f-40e6-b25a-ca58be715d64.JPG',
+      'f6fdbfc7-cd43-4dd6-a9a4-e973f67eec1b.JPG', 'f8f4d079-77fa-4d0c-87bf-0ab97a3decd9.JPG',
+      'f2722505-e04d-408a-a61e-81bd94055d2b.JPG', 'IMG_0099.JPG', 'IMG_0619.jpg',
+      'IMG_2429.JPG', 'IMG_2823.JPG', 'IMG_2882.jpg', 'IMG_3077.JPG', 'IMG_3082.JPG',
+      'IMG_3163.JPG', 'IMG_4121.JPG', 'IMG_4155.jpg', 'IMG_4177.jpg', 'IMG_5016.JPG',
+      'IMG_5242.JPG', 'IMG_6097.JPG', 'IMG_8385.jpg', 'IMG_8508.jpg', 'IMG_8558.jpg',
+      'IMG_8815.JPG', 'IMG_8825.JPG'
+    ];
 
     let currentImageIndex = 0;
     let touchStartX = 0;
@@ -105,14 +81,21 @@
       }
     };
 
-    // Display random images every 5 seconds for 40 seconds
+    // Shuffle the images array
+    for (let i = images.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [images[i], images[j]] = [images[j], images[i]];
+    }
+
+    // Display 5 images for 2 seconds each
+    let currentIndex = 0;
     const imageInterval = setInterval(() => {
       nextImage();
-    }, 5000);
-
-    setTimeout(() => {
-      stopPage();
-    }, 45000);
+      currentIndex++;
+      if (currentIndex === 5) {
+        stopPage();
+      }
+    }, 2000);
 
     // Start the process when the page loads
     document.addEventListener('touchstart', handleTouchStart, false);
