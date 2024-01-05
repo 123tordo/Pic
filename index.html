@@ -48,10 +48,16 @@
 
     let currentImageIndex = 0;
     let touchStartX = 0;
+    let imagesToShow = 5; // Set the number of images to show
 
     const nextImage = () => {
-      document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-      currentImageIndex = (currentImageIndex + 1) % images.length;
+      if (imagesToShow > 0) {
+        document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        imagesToShow--;
+      } else {
+        stopPage();
+      }
     };
 
     const endPage = () => {
@@ -86,14 +92,9 @@
       nextImage();
     }, 4000);
 
-    setTimeout(() => {
-      stopPage();
-    }, 80000);
-
     // Start the process when the page loads
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchend', handleTouchEnd, false);
   </script>
 </body>
 </html>
-
