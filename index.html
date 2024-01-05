@@ -20,14 +20,14 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      font-size: 24px;
+      font-size: 30px;
       color: white;
       display: none;
     }
   </style>
 </head>
 <body>
-  <div id="end-text">Lance o dado outra vez</div>
+  <div id="end-text">Lança o dado outra vez para mais emoções!</div>
 
   <script>
     const images = [
@@ -46,14 +46,21 @@
       'IMG_8815.JPG', 'IMG_8825.JPG'
     ];
 
-    let currentImageIndex = 0;
+    let currentImageIndices = [...Array(images.length).keys()];
     let touchStartX = 0;
     let imagesToShow = 5; // Set the number of images to show
 
+    const shuffleIndices = () => {
+      for (let i = currentImageIndices.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [currentImageIndices[i], currentImageIndices[j]] = [currentImageIndices[j], currentImageIndices[i]];
+      }
+    };
+
     const nextImage = () => {
       if (imagesToShow > 0) {
-        document.body.style.backgroundImage = `url('${images[currentImageIndex]}')`;
-        currentImageIndex = (currentImageIndex + 1) % images.length;
+        const indexToShow = currentImageIndices.pop();
+        document.body.style.backgroundImage = `url('${images[indexToShow]}')`;
         imagesToShow--;
       } else {
         stopPage();
@@ -89,6 +96,7 @@
 
     // Display random images every 4 seconds for 80 seconds
     const imageInterval = setInterval(() => {
+      shuffleIndices();
       nextImage();
     }, 4000);
 
